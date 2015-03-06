@@ -1,0 +1,19 @@
+# WebStorm / IntelliJ
+.idea
+
+# External dependencies
+node_modules
+
+# Bundle to be served live
+dist
+
+# Bundle to be served during development time
+.tmp
+
+# Bower components
+bower_components
+
+# Test coverage reports
+test/coverage
+
+test/coverage-cobertura

@@ -1,0 +1,62 @@
+{
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "name": "coleman-dispatcher",
+  "version": "0.1.0",
+  "description": "Backbone.Events-based dispatcher for a flux architecture.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node_modules/.bin/mocha test/specs --recursive --reporter spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eatfirst/jesse-web.git"
+  },
+  "keywords": [
+    "flux",
+    "dispatcher",
+    "dispatchr",
+    "backbone",
+    "events",
+    "backbone.events",
+    "coleman-dispatcher"
+  ],
+  "author": "Rocco Curcio",
+  "license": "DWTFYWPL",
+  "bugs": {
+    "url": "https://github.com/jsdotcr/coleman-dispatcher/issues"
+  },
+  "homepage": "https://github.com/eatfirst/coleman-dispatcher",
+  "devDependencies": {
+    "browser-sync": "^2.2.2",
+    "browserify": "^9.0.3",
+    "chai": "^2.1.1",
+    "gulp": "^3.8.11",
+    "gulp-complexity": "^0.3.0",
+    "gulp-filter": "^2.0.2",
+    "gulp-gzip": "^1.0.0",
+    "gulp-if": "^1.2.5",
+    "gulp-jscs": "^1.4.0",
+    "gulp-jshint": "^1.9.2",
+    "gulp-load-plugins": "^0.8.1",
+    "gulp-mocha-phantomjs": "^0.5.3",
+    "gulp-notify": "^2.2.0",
+    "gulp-sourcemaps": "^1.5.0",
+    "gulp-uglify": "^1.1.0",
+    "gulp-util": "^3.0.4",
+    "istanbulify": "^0.1.0",
+    "jshint-stylish": "^1.0.1",
+    "karma": "^0.12.31",
+    "karma-browserify": "^4.0.0",
+    "karma-coverage": "0.2.6",
+    "karma-mocha": "^0.1.10",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^2.4.0"
+  },
+  "dependencies": {
+    "backbone": "^1.1.2",
+    "underscore": "^1.8.2"
+  }
+}
