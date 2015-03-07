@@ -20,10 +20,10 @@ A fucking awesome train/morse/dispatcher hero.
 Just like Backbone.Events, coleman-dispatcher is a static set of methods as well (yeah, it's just an hash with some functions defined as properties, you're right).
 It's in a very early stage, there are quite a few things missing I'd like to add, such as:
 
-[ ] waitFor()
-[ ] **Tons** more of unit tests
-[ ] Caching stores and/or callbacks
-[ ] Provide a way to (automatically) clean up the callbacks
+* waitFor()
+* **Tons** more of unit tests
+* Caching stores and/or callbacks
+* Provide a way to (automatically) clean up the callbacks
 
 Feel free to ask if you have any trouble using this, if you think I've fucked up something, or you'd just like to say hi and/or get a free hug :)
 
@@ -54,8 +54,7 @@ proper events callbacks, based on the store class, using `store` itself as a con
 Under the hood, registerStore will call `registerCallback` with a proper set of arguments. Even if it's a low-level function, I've left this publicly exposed as it may be helpful in some cases.
 Please note none of the three arguments here have a default, you have to explicitly provide them.
 
-
-### colemanDispatcher.handlersHashName
+### handlersHashName = '`handlers`';
 The value of this property is used to retrieve the event callbacks' hash on the registered store so the proper bindings
 can be done. By default, its value is `handlers`.
 Extending the example above, we'd have:
@@ -108,7 +107,7 @@ is fired instead.
 Please notice the `this` inside the callback functions always refers to the Store/Collection/Model in which the callback
 is defined.
 
-### colemanDispatcher.callbackName
+### callbackName = '`onEventDispatched`';
 If no object with `handlersHashName`'s value as a key is found, coleman-dispatcher will fallback to a single default 
 callback, defined by `callbackName`'s value. You may want to use this rather than `handlersHashName` to have the 
 widely used switch block based on the events name in a single callback function.
