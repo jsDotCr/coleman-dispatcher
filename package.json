@@ -8,7 +8,9 @@
   "main": "index.js",
   "scripts": {
     "lint": "node_modules/.bin/eslint lib/*.js test/specs/*.js",
-    "test": "node_modules/.bin/mocha test/specs --recursive --reporter spec"
+    "test": "node_modules/.bin/mocha test/specs --recursive --reporter spec",
+    "test-karma": "./node_modules/karma/bin/karma start karma.config.js",
+    "test-watch": "node_modules/.bin/mocha test/specs --recursive --reporter spec -w"
   },
   "repository": {
     "type": "git",
@@ -30,13 +32,16 @@
   },
   "homepage": "https://github.com/jsdotcr/coleman-dispatcher",
   "devDependencies": {
+    "babelify": "^6.1.2",
     "chai": "^3.0.0",
     "eslint": "^0.22.1",
-    "jscs": "^1.13.1",
-    "jscs-stylish": "^0.3.1",
     "karma": "^0.12.36",
-    "karma-coverage": "0.3.1",
-    "karma-mocha": "^0.1.10"
+    "karma-browserify": "^4.2.1",
+    "karma-coverage": "^0.3.1",
+    "karma-firefox-launcher": "^0.1.6",
+    "karma-mocha": "^0.1.10",
+    "karma-phantomjs-launcher": "^0.2.0",
+    "phantomjs": "^1.9.17"
   },
   "dependencies": {
     "backbone": "^1.2.1",
