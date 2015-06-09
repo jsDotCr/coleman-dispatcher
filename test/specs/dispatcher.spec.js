@@ -1,11 +1,8 @@
 /*global describe, it */
-'use strict';
-
-var chai = require('chai');
-var expect = chai.expect;
+import { expect } from 'chai';
 
 // Pull in the module we want to test.
-var dispatcher = require('../../index');
+import dispatcher from '../../index';
 
 describe('Backbone.js dispatcher module', function() {
   describe('Interface', function() {
