@@ -10,7 +10,9 @@
     "lint": "node_modules/.bin/eslint lib/*.js test/specs/*.js",
     "test": "node_modules/.bin/mocha test/specs --recursive --reporter spec",
     "test-karma": "./node_modules/karma/bin/karma start karma.config.js",
-    "test-watch": "node_modules/.bin/mocha test/specs --recursive --reporter spec -w"
+    "test-watch": "node_modules/.bin/mocha test/specs --recursive --reporter spec -w",
+    "generate-es5": "node_modules/.bin/browserify index.js -o dist/index.es5.js --debug -t babelify -i jquery",
+    "generate-dry-es5": "node_modules/.bin/browserify index.js -o dist/index.es5.js -t babelify -i underscore -i backbone"
   },
   "repository": {
     "type": "git",
@@ -41,7 +43,9 @@
     "karma-firefox-launcher": "^0.1.6",
     "karma-mocha": "^0.1.10",
     "karma-phantomjs-launcher": "^0.2.0",
-    "phantomjs": "^1.9.17"
+    "phantomjs": "^1.9.17",
+    "sinon": "^1.14.1",
+    "sinon-chai": "^2.8.0"
   },
   "dependencies": {
     "backbone": "^1.2.1",
