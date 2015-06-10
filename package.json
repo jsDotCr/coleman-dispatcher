@@ -3,7 +3,7 @@
     "node": ">=0.10.0"
   },
   "name": "coleman-dispatcher",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Backbone.Events-based dispatcher for a flux architecture.",
   "main": "index.js",
   "scripts": {
@@ -31,8 +31,6 @@
   },
   "homepage": "https://github.com/jsdotcr/coleman-dispatcher",
   "devDependencies": {
-    "babelify": "^6.1.2",
-    "browserify": "^10.2.4",
     "chai": "^3.0.0",
     "eslint": "^0.22.1",
     "karma": "^0.12.36",
@@ -46,7 +44,12 @@
     "sinon-chai": "^2.8.0"
   },
   "dependencies": {
+    "babelify": "^6.1.2",
     "backbone": "^1.2.1",
+    "browserify": "^10.2.4",
     "underscore": "^1.8.3"
+  },
+  "browserify": {
+    "transform": ["babelify"]
   }
 }
