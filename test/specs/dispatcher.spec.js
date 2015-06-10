@@ -1,4 +1,5 @@
 /*global describe, it */
+/*eslint func-names: 0*/
 import chai, { expect } from 'chai';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
@@ -20,8 +21,10 @@ describe('Backbone.js dispatcher module', function() {
     });
 
     it('inherits all Backbone.Events object', function() {
-      for (var backboneEvent in BackboneEvents){
-        expect(dispatcher[backboneEvent]).to.be.a.function;
+      for (let backboneEvent in BackboneEvents) {
+        if (BackboneEvents.hasOwnProperty(backboneEvent)){
+          expect(dispatcher[backboneEvent]).to.be.a.function;
+        }
       }
     });
 
@@ -119,44 +122,13 @@ describe('Backbone.js dispatcher module', function() {
     });
 
     it('calls the store\'s listenTo function when called with proper params', function() {
-      let cb = function(){};
+      let cb = function() {};
       dispatcher.registerCallback('eventName', fakeStore, cb);
       expect(fakeStore.listenTo).to.have.been.calledOnce;
       expect(fakeStore.listenTo).to.have.been.calledWithExactly(dispatcher, 'eventName', cb);
     });
   });
 
-/*
-  registerStore(store) {
-    'use strict';
-
-    var storeHandlersHash = store[this.handlersHashName];
-    var storeCallback = store[this.callbackName];
-
-    if (typeof (storeHandlersHash) === 'object') {
-      _.each(storeHandlersHash, function eachStoreHandlerInHash(handler, eventName) {
-        var callback;
-
-        if (typeof (handler) === 'object') {
-          eventName = handler.action;
-          callback = handler.callback;
-        } else {
-          callback = store[handler];
-        }
-        if (!eventName || !callback) {
-          throw new Error('An `' + this.handlersHashName + '` hash is defined, but either there is an ' +
-          'invalid callback or the event name (`' + eventName + '`) is not defined (wrong property name maybe?)');
-        }
-        this.registerCallback(eventName, store, callback);
-      });
-    } else if (typeof (storeCallback) === 'function') {
-      this.registerCallback('all', store, store[this.callbackName]);
-    } else {
-      throw new Error('Neither the handlers hash (' + this.handlersHashName + ') NOR the global dispatcher ' +
-      'callback (' + this.callbackName + ') have been defined on the store!');
-    }
-  }
-  */
   describe('registerStore', function() {
     var fakeBaseStore = {
       listenTo: sinon.stub()
@@ -190,14 +162,14 @@ describe('Backbone.js dispatcher module', function() {
       it('calls `registerCallback`() - using an object as a store', function() {
         let registerCallbackStub = sinon.stub(dispatcher, 'registerCallback');
         let fakeStore = _.extend({
-          [dispatcher.callbackName]: function(){}
+          [dispatcher.callbackName]: function() {}
         }, fakeBaseStore);
 
         dispatcher.registerStore(fakeStore);
         expect(registerCallbackStub)
           .to.have.been.calledOnce
           .and
-          .to.have.been.calledWithExactly('all', fakeStore, fakeStore[dispatcher.callbackName])
+          .to.have.been.calledWithExactly('all', fakeStore, fakeStore[dispatcher.callbackName]);
         registerCallbackStub.restore();
       });
 
@@ -209,7 +181,7 @@ describe('Backbone.js dispatcher module', function() {
         expect(registerCallbackStub)
           .to.have.been.calledOnce
           .and
-          .to.have.been.calledWithExactly('all', fakeStore, fakeStore[dispatcher.callbackName])
+          .to.have.been.calledWithExactly('all', fakeStore, fakeStore[dispatcher.callbackName]);
         registerCallbackStub.restore();
       });
 
@@ -217,7 +189,7 @@ describe('Backbone.js dispatcher module', function() {
         let registerCallbackStub = sinon.stub(dispatcher, 'registerCallback');
         let newFancyName = 'myFancyCallback';
         let fakeStore = _.extend({
-          [newFancyName]: function(){}
+          [newFancyName]: function() {}
         }, fakeBaseStore);
 
         dispatcher.callbackName = newFancyName;
@@ -225,7 +197,7 @@ describe('Backbone.js dispatcher module', function() {
         expect(registerCallbackStub)
           .to.have.been.calledOnce
           .and
-          .to.have.been.calledWithExactly('all', fakeStore, fakeStore[newFancyName])
+          .to.have.been.calledWithExactly('all', fakeStore, fakeStore[newFancyName]);
         registerCallbackStub.restore();
       });
     });
@@ -304,12 +276,14 @@ describe('Backbone.js dispatcher module', function() {
           multiCB.existingFunctionInTheStore = function() {};
           multiCB.handlers = [
             {
-              action: function(){ return 'maybeAGoodActionNameButStillInsideAFunction'; },
+              action: function() {
+                return 'maybeAGoodActionNameButStillInsideAFunction';
+              },
               callback: 'existingFunctionInTheStore'
             }
           ];
 
-          expect(function(){
+          expect(function() {
             dispatcher.registerStore(multiCB);
           }).to.throw(TypeError);
           registerCallbackStub.restore();

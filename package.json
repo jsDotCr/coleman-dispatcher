@@ -9,7 +9,6 @@
   "scripts": {
     "lint": "node_modules/.bin/eslint lib/*.js test/specs/*.js",
     "test": "./node_modules/karma/bin/karma start karma.config.js",
-    "test-watch": "node_modules/.bin/mocha test/specs --recursive --reporter spec -w",
     "generate-es5": "node_modules/.bin/browserify index.js -o dist/index.es5.js -t babelify -i underscore -i backbone"
   },
   "repository": {
