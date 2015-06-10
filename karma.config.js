@@ -10,7 +10,8 @@ module.exports = function(karma) {
     preprocessors: {
       'test/specs/**/*.js': ['browserify', 'coverage']
     },
-    singleRun: false,
+    browsers: ['PhantomJS', 'Firefox'],
+    singleRun: true,
     logLevel: 'LOG_DEBUG',
     autoWatch: true,
     colors: true,
