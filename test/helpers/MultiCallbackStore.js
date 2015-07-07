@@ -16,7 +16,7 @@ class MultiCallbackStore extends FakeStore {
       [actionNames.EVENT](payload) {
         return payload;
       },
-      [actionNames.PLAY_SKA](payload) {
+      [actionNames.PLAY_SKA]() {
         return {
           band: 'Original High Fives',
           album: 'Good Enough',
@@ -27,7 +27,7 @@ class MultiCallbackStore extends FakeStore {
     };
   }
 
-  gimmeSkaPunk(payload) {
+  gimmeSkaPunk() {
     return {
       band: 'Mad Caddies',
       album: 'Dirty Rice',

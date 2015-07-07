@@ -22,7 +22,7 @@ describe('Backbone.js dispatcher module', function() {
 
     it('inherits all Backbone.Events object', function() {
       for (let backboneEvent in BackboneEvents) {
-        if (BackboneEvents.hasOwnProperty(backboneEvent)){
+        if (BackboneEvents.hasOwnProperty(backboneEvent)) {
           expect(dispatcher[backboneEvent]).to.be.a.function;
         }
       }
@@ -122,7 +122,7 @@ describe('Backbone.js dispatcher module', function() {
     });
 
     it('calls the store\'s listenTo function when called with proper params', function() {
-      let cb = function() {};
+      let cb = function callback() {};
       dispatcher.registerCallback('eventName', fakeStore, cb);
       expect(fakeStore.listenTo).to.have.been.calledOnce;
       expect(fakeStore.listenTo).to.have.been.calledWithExactly(dispatcher, 'eventName', cb);
