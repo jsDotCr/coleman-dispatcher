@@ -67,7 +67,7 @@ module.exports = function(karma) {
         {
           type: 'lcov',
           dir: 'test/coverage/',
-          subdir: 'report-lcov'
+          subdir: '.'
         }
       ]
     }

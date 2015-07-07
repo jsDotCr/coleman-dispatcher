@@ -18,7 +18,7 @@ test-karma:
 	@ $(KARMA) start karma.config.js
 
 test-coveralls:
-	@ cat ./test/coverage/report-lcov/lcov.info | $(COVERALLS)
+	@ cat ./test/coverage/lcov.info | $(COVERALLS)
 
 test-sauce:
 	# run the saucelabs in separate chunks
