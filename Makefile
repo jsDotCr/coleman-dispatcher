@@ -19,3 +19,7 @@ test-karma:
 
 test-coveralls:
 	@ cat ./test/coverage/report-lcov/lcov.info | $(COVERALLS)
+
+test-sauce:
+	# run the saucelabs in separate chunks
+	@ for group in 0 1 2 3; do GROUP=$$group make test-karma; done

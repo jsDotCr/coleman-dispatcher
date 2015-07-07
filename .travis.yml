@@ -1,7 +1,6 @@
 language: node_js
 node_js:
    - "0.12.0"
-
 branches:
   only:
     - master
@@ -11,7 +10,12 @@ before_script:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
 after_success:
-  make make test-coveralls
-
+  make test-sauce && make test-coveralls
 notifications:
     email: false
+env:
+  global:
+    - secure: TJM6x/RqFxnXgFwJg8PJ0mi+nN0WWsE8EtsA2d27Mb35YMdserkEjXo9eMiKQD+VOORIA6Sjx0VqL32vhY1FgOxckuTDxD3AEqsjph1PhNFsmzE20KX4F039n3GorBiQCDr14hcYENq1ZDWIMidZYJsJy+djZD6di1RjxhMzs4g=
+    - secure: XAfpf05AcWBF0bzBOgacrL5Z6x6llMkk5Wl+K1+fjOrkizWIS6QJMtA6Ru6gqRTSjocwSVM5aFjYZpi2lNFqXv5H0EAXgQCFPru5iykLDIfauemFxYu3lKmCmHrwlyiUWeG37gce5z4YqOlZ9CB+00xqAWK74gsd/A2aR7aCYrM=
+addons:
+  sauce_connect: true

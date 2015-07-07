@@ -32,6 +32,7 @@
   "homepage": "https://github.com/jsdotcr/coleman-dispatcher",
   "devDependencies": {
     "chai": "^3.0.0",
+    "coveralls": "^2.11.2",
     "eslint": "^0.22.1",
     "karma": "^0.12.36",
     "karma-browserify": "^4.2.1",
@@ -39,6 +40,8 @@
     "karma-firefox-launcher": "^0.1.6",
     "karma-mocha": "^0.1.10",
     "karma-phantomjs-launcher": "^0.2.0",
+    "karma-sauce-launcher": "^0.2.14",
+    "mocha-lcov-reporter": "0.0.2",
     "phantomjs": "^1.9.17",
     "sinon": "^1.14.1",
     "sinon-chai": "^2.8.0"
@@ -47,8 +50,6 @@
     "babelify": "^6.1.2",
     "backbone": "^1.2.1",
     "browserify": "^10.2.4",
-    "coveralls": "^2.11.2",
-    "mocha-lcov-reporter": "0.0.2",
     "underscore": "^1.8.3"
   },
   "browserify": {
