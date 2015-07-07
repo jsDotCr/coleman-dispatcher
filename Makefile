@@ -19,7 +19,3 @@ test-karma:
 
 test-coveralls:
 	@ cat ./test/coverage/report-lcov/lcov.info | $(COVERALLS)
-
-test-sauce:
-	# run the saucelabs in separate chunks
-	@ for group in 0 1 2 3; do GROUP=$$group SAUCE_USERNAME=riotjs SAUCE_ACCESS_KEY=124f5640-fd66-4848-acdb-98c1d601d04d SAUCELABS=1 make test-karma; done
