@@ -41,6 +41,11 @@ module.exports = function(karma) {
         {
           type: 'cobertura',
           dir: 'test/coverage-cobertura/'
+        },
+        {
+          type: 'lcov',
+          dir: 'test/coverage/',
+          subdir: 'report-lcov'
         }
       ]
     }

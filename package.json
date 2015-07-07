@@ -47,9 +47,13 @@
     "babelify": "^6.1.2",
     "backbone": "^1.2.1",
     "browserify": "^10.2.4",
+    "coveralls": "^2.11.2",
+    "mocha-lcov-reporter": "0.0.2",
     "underscore": "^1.8.3"
   },
   "browserify": {
-    "transform": ["babelify"]
+    "transform": [
+      "babelify"
+    ]
   }
 }
