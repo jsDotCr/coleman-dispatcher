@@ -1,4 +1,4 @@
-//var istanbul = require('browserify-istanbul');
+var istanbul = require('browserify-istanbul');
 var babelify = require('babelify');
 
 var saucelabsBrowsers = require('./test/saucelabs-browsers').browsers;
@@ -18,7 +18,8 @@ module.exports = function(karma) {
   karma.set({
     frameworks: ['browserify', 'mocha'],
     files: [
-      'test/specs/**/*.js'
+      'test/specs/**/*.js',
+      'lib/**/*.js'
     ],
     sauceLabs: {
       build: 'TRAVIS #' + process.env.TRAVIS_BUILD_NUMBER + ' (' + process.env.TRAVIS_BUILD_ID + ')',
@@ -29,7 +30,8 @@ module.exports = function(karma) {
       recordScreenshots: true
     },
     preprocessors: {
-      'test/specs/**/*.js': ['browserify', 'coverage']
+      'test/specs/**/*.js': ['browserify'],
+      'lib/**/*.js': ['browserify', 'coverage']
     },
     customLaunchers: saucelabsBrowsers,
     browsers: browsers,
@@ -42,12 +44,8 @@ module.exports = function(karma) {
       debug: true,
       bundleDelay: 1000,
       transform: [
-        ['babelify', { sourceMaps: 'both' }]//,
-        //[istanbul({
-        //  instrumenter: isparta,
-        //  ignore: ['test/specs/**/*.js', 'node_modules/**'],
-        //  defaultIgnore: true
-        //})]
+        ['babelify', { sourceMaps: 'both' }],
+        [istanbul()]
       ],
       configure: function(bundle) {
         bundle.ignore('jquery');

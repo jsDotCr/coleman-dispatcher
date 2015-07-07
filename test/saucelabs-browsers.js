@@ -1,49 +1,49 @@
 module.exports = {
   browsers: {
-    slsafari: {
+    'SL_safari': {
       base: 'SauceLabs',
       browserName: 'safari',
       platform: 'OS X 10.10',
       group: 0
     },
-    slIE9: {
+    'SL_IE9': {
       base: 'SauceLabs',
       browserName: 'internet explorer',
       platform: 'Windows 7',
       version: '9',
       group: 1
     },
-    slIE10: {
+    'SL_IE10': {
       base: 'SauceLabs',
       browserName: 'internet explorer',
       platform: 'Windows 8',
       version: '10',
       group: 1
     },
-    slIE11: {
+    'SL_IE11': {
       base: 'SauceLabs',
       browserName: 'internet explorer',
       platform: 'Windows 8.1',
       version: '11',
       group: 1
     },
-    slandroid5: {
+    'SL_android5': {
       base: 'SauceLabs',
       browserName: 'android',
       version: '5.1',
       group: 2
     },
-    slchrome: {
+    'SL_chrome': {
       base: 'SauceLabs',
       browserName: 'chrome',
       group: 2
     },
-    slfirefox: {
+    'SL_firefox': {
       base: 'SauceLabs',
       browserName: 'firefox',
       group: 2
     },
-    slandroid4: {
+    'SL_android4': {
       base: 'SauceLabs',
       browserName: 'android',
       version: '4.0',
