@@ -6,6 +6,7 @@ branches:
   only:
     - master
     - dev
+    - features/travis-ci
 after_success:
   make test-sauce && make test-coveralls
 
