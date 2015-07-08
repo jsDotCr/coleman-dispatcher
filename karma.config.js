@@ -1,4 +1,3 @@
-var istanbul = require('browserify-istanbul');
 var babelify = require('babelify');
 
 var saucelabsBrowsers = require('./test/saucelabs-browsers').browsers;
@@ -22,52 +21,30 @@ module.exports = function(karma) {
       'lib/**/*.js'
     ],
     sauceLabs: {
-      build: 'TRAVIS #' + process.env.TRAVIS_BUILD_NUMBER + ' (' + process.env.TRAVIS_BUILD_ID + ')',
-      tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER,
       testName: 'coleman-dispatcher',
       startConnect: true,
-      recordVideo: true,
       recordScreenshots: true
     },
     preprocessors: {
       'test/specs/**/*.js': ['browserify'],
-      'lib/**/*.js': ['browserify', 'coverage']
+      'lib/**/*.js': ['browserify']
     },
     customLaunchers: saucelabsBrowsers,
     browsers: browsers,
     singleRun: true,
     logLevel: 'LOG_DEBUG',
-    autoWatch: true,
     colors: true,
     browserify: {
       ignore: 'jquery',
       debug: true,
       bundleDelay: 1000,
       transform: [
-        ['babelify', { sourceMaps: 'both' }],
-        [istanbul()]
+        ['babelify', { sourceMaps: 'both' }]
       ],
       configure: function(bundle) {
         bundle.ignore('jquery');
       }
     },
-    reporters: ['progress', 'coverage', 'saucelabs'],
-    coverageReporter: {
-      reporters: [
-        //{
-        //  type: 'html',
-        //  dir: 'test/coverage/'
-        //},
-        {
-          type: 'cobertura',
-          dir: 'test/coverage-cobertura/'
-        },
-        {
-          type: 'lcov',
-          dir: 'test/coverage/',
-          subdir: '.'
-        }
-      ]
-    }
+    reporters: ['progress', 'saucelabs']
   });
 };

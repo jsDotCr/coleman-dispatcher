@@ -7,7 +7,7 @@ branches:
     - dev
     - feature/travis-ci
 after_success:
-  make test-sauce && make test-coveralls
+    make test-sauce
 notifications:
     email: false
 env:
