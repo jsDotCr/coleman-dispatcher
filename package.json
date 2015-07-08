@@ -3,7 +3,7 @@
     "node": ">=0.10.0"
   },
   "name": "coleman-dispatcher",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Backbone.Events-based dispatcher for a flux architecture.",
   "main": "index.js",
   "scripts": {
@@ -25,7 +25,12 @@
     "coleman-dispatcher"
   ],
   "author": "Rocco Curcio",
-  "license": "DWTFYWPL",
+  "licenses": [
+    {
+      "type": "WTFPL",
+      "url": "http://www.wtfpl.net/about/"
+    }
+  ],
   "bugs": {
     "url": "https://github.com/jsdotcr/coleman-dispatcher/issues"
   },
