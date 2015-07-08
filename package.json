@@ -3,13 +3,13 @@
     "node": ">=0.10.0"
   },
   "name": "coleman-dispatcher",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Backbone.Events-based dispatcher for a flux architecture.",
   "main": "index.js",
   "scripts": {
     "lint": "node_modules/.bin/eslint lib/*.js test/specs/*.js",
-    "test": "./node_modules/karma/bin/karma start karma.config.js",
-    "generate-es5": "node_modules/.bin/browserify index.js -o dist/index.es5.js -t babelify -i underscore -i backbone"
+    "test": "npm run lint && ./node_modules/karma/bin/karma start karma.config.js",
+    "generate-es5": "npm run lint && node_modules/.bin/browserify index.js -o dist/index.es5.js -t babelify -i underscore -i backbone"
   },
   "repository": {
     "type": "git",
@@ -25,22 +25,27 @@
     "coleman-dispatcher"
   ],
   "author": "Rocco Curcio",
-  "license": "DWTFYWPL",
+  "licenses": [
+    {
+      "type": "WTFPL",
+      "url": "http://www.wtfpl.net/about/"
+    }
+  ],
   "bugs": {
     "url": "https://github.com/jsdotcr/coleman-dispatcher/issues"
   },
   "homepage": "https://github.com/jsdotcr/coleman-dispatcher",
   "devDependencies": {
     "chai": "^3.0.0",
-    "eslint": "^0.22.1",
-    "karma": "^0.12.36",
+    "eslint": "^0.24.0",
+    "karma": "^0.12.37",
     "karma-browserify": "^4.2.1",
-    "karma-coverage": "^0.3.1",
+    "karma-coverage": "^0.4.2",
     "karma-firefox-launcher": "^0.1.6",
-    "karma-mocha": "^0.1.10",
+    "karma-mocha": "^0.2.0",
     "karma-phantomjs-launcher": "^0.2.0",
     "phantomjs": "^1.9.17",
-    "sinon": "^1.14.1",
+    "sinon": "^1.15.4",
     "sinon-chai": "^2.8.0"
   },
   "dependencies": {

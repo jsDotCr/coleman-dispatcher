@@ -88,7 +88,7 @@
     "radix": 2,
     "vars-on-top": 2,
     "wrap-iife": [2, "inside"],
-    "yoda": "never",
+    "yoda": [2, "never"],
 
     "strict": [1, "function"],
     "no-extra-strict": 0,
@@ -114,7 +114,9 @@
 
     "indent": [2, 2],
     "brace-style": [2, "1tbs"],
-    "camelcase": [2, "always"],
+    "camelcase": [2, {
+      "properties": "always"
+    }],
     "comma-spacing": 2,
     "comma-style": 2,
     "consistent-this": 0,
@@ -144,7 +146,7 @@
     "semi": [1, "always"],
     "semi-spacing": [1, { "before": false, "after": true}],
     "sort-vars": 0,
-    "space-after-keywords": "always",
+    "space-after-keywords": [2, "always"],
     "space-before-blocks": 2,
     "space-in-brackets": 0,
     "space-in-parens": 0,

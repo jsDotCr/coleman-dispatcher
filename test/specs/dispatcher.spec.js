@@ -22,7 +22,7 @@ describe('Backbone.js dispatcher module', function() {
 
     it('inherits all Backbone.Events object', function() {
       for (let backboneEvent in BackboneEvents) {
-        if (BackboneEvents.hasOwnProperty(backboneEvent)){
+        if (BackboneEvents.hasOwnProperty(backboneEvent)) {
           expect(dispatcher[backboneEvent]).to.be.a.function;
         }
       }
@@ -69,14 +69,15 @@ describe('Backbone.js dispatcher module', function() {
       };
 
       dispatcher.dispatch('eventName', payload);
-      expect(triggerSpy).to.have.been.calledWithExactly('eventName', payload, 'eventName');
+      expect(triggerSpy).to.have.been.calledWith('eventName', payload, 'eventName');
       triggerSpy.restore();
     });
   });
 
   describe('registerCallback', function() {
     let fakeStore = {
-      listenTo: sinon.stub()
+      listenTo: sinon.stub(),
+      handlers: function() {}
     };
 
     it('fails badly if not even an eventName has been passed', function() {
