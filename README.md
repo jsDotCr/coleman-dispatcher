@@ -4,18 +4,17 @@ Yet another [Flux](http://facebook.github.io/react/docs/flux-overview.html) disp
 ## Install
 Install it using the command `npm install coleman-dispatcher`.
 
-In case you're not using ES6 and/or a transipler on your side, the package comes with browserify included (as a dev dependency, I swear!). To translate it as ES5, the right command to run is `npm run generate-es5`.
+In case you're not using ES2015 and/or a transipiler on your side, the package comes with browserify included (as a dev dependency). To transpile it as ES5, the right command to run is `npm run generate-es5`: you'll find the file in the `dist` folder.
 
-The tests are run using `npm test` (it will run karma & PhantomJS & Firefox by default), while the lint is available using `npm run lint`.
+The tests are run using `npm test` (it will run ESLint, and then karma & PhantomJS), while the lint is available using `npm run lint`.
 
 ## Why this name
 Why coleman-dispatcher? Because I had to find a name for it and all of the c00ler/most appropriate names are already used. So I ended up on Wikipedia looking for something related, more or less, and I've found the tragic but amazing story of [Vince Coleman](http://en.wikipedia.org/wiki/Vince_Coleman_%28train_dispatcher%29), a train dispatcher who spent his last moments on a morse code machine requiring to stop all the trains going to Halifax since a huge explosion was expected nearby, caused by collision between a munitions ship and a vassel. A fucking awesome train/morse/dispatcher hero.
 
 ## What it is
-With the last additions, this package evolved from an object with some useful functions, to an ES6 class. It is instantiated in index.js though, so it'll basically (not 100% accurate, I know) remain a collection of useful functions with a nice defined scope.
+With the last additions, this package evolved from an object with some useful functions, to an ES2015 class. It is instantiated in index.js though, so it'll basically (not 100% accurate, I know) remain a collection of useful functions with a nice defined scope.
 
 Still to add, at some point:
-- waitFor()
 - Caching stores and/or callbacks
 - Provide a way to (automatically) clean up the callbacks
 
@@ -34,6 +33,9 @@ var TrainStore = Backbone.Collection.extend({
   model: Train,
   initialize: function initialize() {
     Dispatcher.registerStore(this);
+  },
+  onEventDispatched: function(payload, eventName, done, error) {
+    // Single callback. Keep on reading for more info!
   }
 });
 ```
@@ -71,6 +73,100 @@ module.exports = {
     Dispatcher.dispatch(ActionTypes.TRAIN_STOP);
   }
 };
+```
+
+### dispatch(`eventName`[, `payload`[, `options`])
+To trigger an event, the `dispatch` function must be called. `payload` and `options` are optional.
+`options` can have as keys:
+
+* <string> `waitFor`: It waits for this action name's callbacks to be executed before triggering `eventName`
+* <boolean> `async`: If *true*, it'll pass a done and error callbacks to all the attached `waitFor`'s callbacks thru `dispatch`. In order to execute `eventName` action, the `done()` has to be explicitly called. (default: false)
+* <function> `error`:  Optional, used only if `async` is true. It's executed whenever the error callback sent thru the `dispatch` function is invoked
+
+```js
+var Backbone = require('backbone');
+var Dispatcher = require('coleman-dispatcher');
+var TrainConstants = require('actions/TrainConstants');
+
+var ActionTypes = TrainConstants.ActionTypes;
+
+module.exports = {
+  fetchTrains: function fetchTrains() {
+    Dispatcher.dispatch(ActionTypes.TRAIN_FETCH);
+  },
+  stopTrain: function stopTrain(id) {
+    Dispatcher.dispatch(ActionTypes.TRAIN_STOP, {}, {
+      waitFor: ActionTypes.TRAIN_FETCH,
+      async: true,
+      error: function() {
+        // Something terribly wrong has just happened in one of the waitFor's handlers.
+      }
+    });
+  }
+};
+```
+
+With the code above, `ActionTypes.TRAIN_STOP` will **not** be invoked until any of `ActionTypes.TRAIN_FETCH`'s callbacks will execute the `done()` callback passed to the handlers.
+
+
+### ActionsCallback(`payload`, `actionName`[, `doneCb`[, `errorCb`]])
+
+All the callbacks, no matter how have been registered, will get:
+
+* the action's payload (if there's any)
+* the action name
+* the done callback
+* the error callback
+
+The two callbacks are sent out only if the action has been dispatched using `options.async = true`. In this case, whenever appropriate, `doneCB()` has to be explicitly called in order to let the action waiting to be executed as well.
+Extending the example above with the Store side, let's say we'd like to execute `handleStopTrain` as soon as the `TrainStore` collection is done fetching trains from the depot, erm, the server.
+
+```js
+var Backbone = require('backbone');
+var Dispatcher = require('coleman-dispatcher');
+var TrainActions = require('actions/TrainActions');
+var ActionTypes = TrainActions.ActionTypes;
+
+var TrainStore = Backbone.Collection.extend({
+  url: '/api/trains',
+  model: Train,
+  handlers: [
+    {
+      action: ActionTypes.TRAIN_FETCH,
+      callback: function handleFetchTrain(payload, eventName, doneCb, errorCb) {
+        this.fetch({
+          success: function() {
+            if (doneCb) {
+              doneCb();
+            }
+          },
+          error: function() {
+            if (errorCb) {
+              errorCb();
+            }
+          }
+        });
+      }
+    },
+    {
+      action: ActionTypes.TRAIN_STOP,
+      callback: function handleStopTrain(payload) {
+        var trainToStop = this.findWhere({
+          trainId: payload.id
+        });
+        if (trainToRun){
+          myTrain.set({
+            isRunning: false
+          });
+        }
+      }
+    }
+  ],
+  initialize: function initialize() {
+    Dispatcher.registerStore(this);
+  }
+});
+
 ```
 
 ## Extended examples of registering a Store using the hash
