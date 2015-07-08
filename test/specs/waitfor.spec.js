@@ -1,4 +1,4 @@
-/*global describe, it */
+/*global describe, it, beforeEach, before, after, afterEach */
 /*eslint func-names: 0*/
 import chai, { expect } from 'chai';
 import sinon from 'sinon';
@@ -176,13 +176,13 @@ describe('waitFor', () => {
       let waitForMeSpy = sinon.spy();
       let fakeStore = new MultiCallbackStore();
       let secondFakeStore = new MultiCallbackStore();
-
-      this.dispatcher.registerCallback('asyncWaitForMe', fakeStore, function(payload, eventName, dispatcherDone) {
+      let secondaryActionCallback = function(payload, eventName, doneCb) {
         setTimeout(function() {
           waitForMeSpy();
-          dispatcherDone();
+          doneCb();
         }, 500);
-      });
+      };
+      this.dispatcher.registerCallback('asyncWaitForMe', fakeStore, secondaryActionCallback);
       this.dispatcher.registerCallback('asyncYouWill', secondFakeStore, mainActionSpy);
 
       this.dispatcher.dispatch('asyncYouWill', {}, {
@@ -202,13 +202,14 @@ describe('waitFor', () => {
       let waitForMeSpy = sinon.spy();
       let fakeStore = new MultiCallbackStore();
       let secondFakeStore = new MultiCallbackStore();
-
-      this.dispatcher.registerCallback('asyncWaitForMe', fakeStore, function(payload, eventName, doneCB, errorCB) {
+      let secondaryActionCallback = function(payload, eventName, doneCb, errorCb) {
         setTimeout(function() {
           waitForMeSpy();
-          errorCB();
+          errorCb();
         }, 500);
-      });
+      };
+
+      this.dispatcher.registerCallback('asyncWaitForMe', fakeStore, secondaryActionCallback);
       this.dispatcher.registerCallback('asyncYouWill', secondFakeStore, mainActionSpy);
 
       this.dispatcher.dispatch('asyncYouWill', {}, {
@@ -228,12 +229,13 @@ describe('waitFor', () => {
       let mainActionSpy = sinon.spy();
       let fakeStore = new MultiCallbackStore();
       let secondFakeStore = new MultiCallbackStore();
-
-      this.dispatcher.registerCallback('asyncWaitForMe', fakeStore, function(payload, eventName, doneCB, errorCB) {
+      let secondaryActionCallback = function(payload, eventName, doneCb, errorCb) {
         setTimeout(function() {
-          errorCB();
+          errorCb();
         }, 500);
-      });
+      };
+
+      this.dispatcher.registerCallback('asyncWaitForMe', fakeStore, secondaryActionCallback);
       this.dispatcher.registerCallback('asyncYouWill', secondFakeStore, mainActionSpy);
 
       this.dispatcher.dispatch('asyncYouWill', {}, {
