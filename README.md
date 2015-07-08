@@ -33,8 +33,6 @@ var TrainStore = Backbone.Collection.extend({
   url: '/api/trains',
   model: Train,
   initialize: function initialize() {
-    'use strict';
-
     Dispatcher.registerStore(this);
   }
 });
@@ -55,8 +53,8 @@ Under the hood, registerStore will call `registerCallback` with a proper set of 
 
 Please note none of the three arguments here have a default, you have to explicitly provide them.
 
-### dispatch(`eventName`[, `payload`[, `someOtherPayload`...]])
-To trigger an event, the `dispatch` function must be called. Any payload is optional. More than one payload can be defined: anything from the second argument on will be forwarded to the callbacks.
+### dispatch(`eventName`[, `payload`])
+To trigger an event, the `dispatch` function must be called. `payload` is optional.
 
 ```js
 var Backbone = require('backbone');
@@ -67,13 +65,9 @@ var ActionTypes = TrainConstants.ActionTypes;
 
 module.exports = {
   fetchTrains: function fetchTrains() {
-    'use strict';
-
     Dispatcher.dispatch(ActionTypes.TRAIN_FETCH);
   },
   stopTrain: function stopTrain(id) {
-    'use strict';
-
     Dispatcher.dispatch(ActionTypes.TRAIN_STOP);
   }
 };
@@ -94,16 +88,12 @@ var TrainStore = Backbone.Collection.extend({
     {
       action: ActionTypes.TRAIN_FETCH,
       callback: function handleFetchTrain() {
-        'use strict';
-
         this.fetch();
       }
     },
     {
       action: ActionTypes.TRAIN_STOP,
       callback: function handleStopTrain(payload) {
-        'use strict';
-
         var trainToStop = this.findWhere({
           trainId: payload.id
         });
@@ -116,8 +106,6 @@ var TrainStore = Backbone.Collection.extend({
     }
   ],
   initialize: function initialize() {
-    'use strict';
-
     Dispatcher.registerStore(this);
   }
 });
@@ -147,18 +135,12 @@ var TrainStore = Backbone.Collection.extend({
     }
   ],
   initialize: function initialize() {
-    'use strict';
-
     Dispatcher.registerStore(this);
   },
   handleFetchTrain: function handleFetchTrain() {
-    'use strict';
-
     this.fetch();
   },
   stopThatTrain: function stopThatTrain() {
-    'use strict';
-
     var trainToStop = this.findWhere({
       trainId: payload.id
     });
@@ -188,18 +170,12 @@ var TrainStore = Backbone.Collection.extend({
     'TRAIN_STOP': 'stopThatTrain'
   },
   initialize: function initialize() {
-    'use strict';
-
     Dispatcher.registerStore(this);
   },
   handleFetchTrain: function handleFetchTrain() {
-    'use strict';
-
     this.fetch();
   },
   stopThatTrain: function stopThatTrain() {
-    'use strict';
-
     var trainToStop = this.findWhere({
       trainId: payload.id
     });
@@ -229,7 +205,7 @@ class TrainStore extends Backbone.Collection {
     return '/api/trains';
   }
 
-  model() {
+  get model() {
     return Train;
   }
 
@@ -256,8 +232,6 @@ class TrainStore extends Backbone.Collection {
   }
 
   initialize() {
-    'use strict';
-
     Dispatcher.registerStore(this);
   }
 }
@@ -298,8 +272,6 @@ var TrainStore = Backbone.Collection.extend({
     }
   },
   initialize: function initialize() {
-    'use strict';
-
     Dispatcher.registerStore(this);
   }
 });
