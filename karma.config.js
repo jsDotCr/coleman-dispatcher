@@ -12,7 +12,7 @@ module.exports = function(karma) {
     },
     browsers: ['PhantomJS', 'Firefox'],
     singleRun: true,
-    logLevel: 'LOG_DEBUG',
+    logLevel: 'LOG_INFO',
     autoWatch: true,
     colors: true,
     browserify: {
