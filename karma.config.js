@@ -1,5 +1,5 @@
 var saucelabsBrowsers = require('./test/saucelabs-browsers').browsers;
-var browsers = ['PhantomJS', 'Firefox'];
+var browsers = ['PhantomJS'];
 
 // run the tests only on the saucelabs browsers
 if (process.env.SAUCELABS) {
