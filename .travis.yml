@@ -7,7 +7,7 @@ branches:
     - dev
     - feature/travis-ci
 after_success:
-    make test-sauce
+    npm run test-sauce && npm run generate-es5
 notifications:
     email: false
 env:

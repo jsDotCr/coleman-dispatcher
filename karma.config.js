@@ -1,5 +1,3 @@
-var babelify = require('babelify');
-
 var saucelabsBrowsers = require('./test/saucelabs-browsers').browsers;
 var browsers = ['PhantomJS', 'Firefox'];
 
@@ -31,11 +29,13 @@ module.exports = function(karma) {
     },
     customLaunchers: saucelabsBrowsers,
     browsers: browsers,
+    browserDisconnectTimeout: 10000,
+    browserDisconnectTolerance: 2,
+    browserNoActivityTimeout: 120000,
     singleRun: true,
     logLevel: 'LOG_DEBUG',
     colors: true,
     browserify: {
-      ignore: 'jquery',
       debug: true,
       bundleDelay: 1000,
       transform: [

@@ -8,7 +8,8 @@
   "main": "index.js",
   "scripts": {
     "lint": "node_modules/.bin/eslint lib/*.js test/specs/*.js",
-    "test": "./node_modules/karma/bin/karma start karma.config.js",
+    "test": "npm run lint && ./node_modules/karma/bin/karma start karma.config.js",
+    "test-sauce": "for group in 0 1 2 3; do GROUP=$group SAUCELABS=1 SAUCE_USERNAME=jsDotCr SAUCE_ACCESS_KEY=c989173d-69bb-4b05-92fd-9e7d52b9c3bb npm test; done",
     "generate-es5": "node_modules/.bin/browserify index.js -o dist/index.es5.js -t babelify -i underscore -i backbone"
   },
   "repository": {
