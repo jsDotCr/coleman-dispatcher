@@ -17,3 +17,5 @@ bower_components
 test/coverage
 
 test/coverage-cobertura
+
+npm-debug.log
